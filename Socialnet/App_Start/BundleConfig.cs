@@ -1,8 +1,18 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Optimization;
 
 namespace Socialnet
 {
+    public class CustomBundleOrderer : IBundleOrderer
+    {
+        public IEnumerable<FileInfo> OrderFiles(BundleContext context, IEnumerable<FileInfo> files)
+        {
+            return files;
+        }
+    }
+
     public class BundleConfig
     {
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
@@ -26,9 +36,15 @@ namespace Socialnet
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.min.css",
-                "~/Content/bootstrap-theme.min.css",
-                "~/Content/site.css"));
+            var bundle = new StyleBundle("~/Content/css")
+            {
+                Orderer = new CustomBundleOrderer()
+            };
+
+            bundle.Include("~/Content/bootstrap.min.css");
+            bundle.Include("~/Content/bootstrap-theme.min.css");
+            bundles.Add(bundle);
+           
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

@@ -20,12 +20,19 @@ namespace Socialnet.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                FormsAuthentication.SetAuthCookie("username", true);
-                return RedirectToAction("Index", "Profile");
+                if (isValidUser(user.Username, user.Password))
+                {
+                    FormsAuthentication.SetAuthCookie("username", true);
+                    return RedirectToAction("Index", "Profile");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Login details are not okay");
+                }
+                
             }
 
-            return Content("No user found");
+            return View("Index");
         }
 
 
@@ -48,6 +55,16 @@ namespace Socialnet.Controllers
 
             }
             return View();
+        }
+
+        public bool isValidUser(String Username, String Password)
+        {
+            var user = _db.Users.FirstOrDefault(m => m.Username==Username && m.Password == Password);
+            if (user != null )
+            {
+                return true;
+            }
+            return false;
         }
 
        

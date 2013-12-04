@@ -1,17 +1,18 @@
 ﻿.center {
-   width: 300px;
-   height: 300px;
+   width: 200px;
+   height: 200px;
    position: absolute;
    left: 50%;
    top: 50%; 
    margin-left: -150px;
    margin-top: -150px;
+   text-align:center
 }
 body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
-    background-color: #fff;
+    background-color: #aaa;
 }
 
 header, footer, nav, section {

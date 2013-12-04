@@ -4,20 +4,25 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<div class="center">
 @using (Html.BeginForm("Login", "Home", FormMethod.Post)){
-
-    @Html.LabelFor(m => m.Username);
-    @Html.TextBoxFor(m => m.Username);
-
-    @Html.LabelFor(m=>m.Password)
-    @Html.PasswordFor(m=>m.Password)
-
-    <input type="submit" />
+    @Html.ValidationSummary(true, "Login failed. Check your login credentials");
+    <p>
+    @Html.LabelFor(m => m.Username)<br />
+    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Username)
+    </p>
+    
+    <p>
+    @Html.LabelFor(m => m.Password)<br />
+    @Html.PasswordFor(m => m.Password,new { @class = "form-control" })
+    </p>
+    <input type="submit" class="btn" />
 }
 
 
-<button type="button" data-toggle="modal" data-target="#registerModal">Register here</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register here</button>
+        </div>
 
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
