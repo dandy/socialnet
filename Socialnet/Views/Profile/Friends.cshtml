@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Socialnet.Models.Friend>
+
+@{
+    ViewBag.Title = "Friends";
+}
+<h2>@Html.ActionLink("Home", "Index")</h2>
+<h2>Friends</h2>
+@foreach (Socialnet.Models.Friend friend in Model)
+{
+    @friend.FriendId<br />
+
+}

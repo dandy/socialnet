@@ -10,10 +10,32 @@ namespace Socialnet.Controllers
 {
     public class ProfileController : Controller
     {
-
+        SocialContext _db = new SocialContext();
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            ProfileViewModel model = new ProfileViewModel()
+            {
+                UserPhotos = _db.Photos.Where(u => u.Username == User.Identity.Name).ToList()
+            };
+            return View(model);
+        }
+
+        public ActionResult Show(string username)
+        {
+            ViewData["name"] = username;
+            ProfileViewModel model = new ProfileViewModel()
+            {
+                UserPhotos = _db.Photos.Where(u => u.Username == username).ToList()
+            };
+            return View("Index",model);
+
+        }
+
+        public ActionResult Friends()
+        {
+            var userEntitys = _db.Friends.Where(m => m.UserId == _db.CurrentUser).ToList();
+            return View(userEntitys);
         }
 
         public ActionResult FileUpload(HttpPostedFileBase file)
@@ -29,11 +51,16 @@ namespace Socialnet.Controllers
                 // save the image path path to the database or you can send image 
                 // directly to database
                 // in-case if you want to store byte[] ie. for DB
-                using (System.IO.MemoryStream ms = new MemoryStream())
+                var photoEntry = new Photo()
                 {
-                    file.InputStream.CopyTo(ms);
-                    byte[] array = ms.GetBuffer();
-                }
+
+                    Username = User.Identity.Name,
+                    Location = pic,
+                    DateAdded = DateTime.Now
+                };
+
+                _db.Photos.Add(photoEntry);
+                _db.SaveChanges();
 
             }
             // after successfully uploading redirect the user

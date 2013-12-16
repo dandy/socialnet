@@ -7,10 +7,10 @@ namespace Socialnet.Models
 {
     public class Photo
     {
-        public int Id { get; set; }
-        public String Name { get; set; }
-        public String PhotoeLocation { get; set; }
+        public int PhotoId { get; set; }
+        public string   Username { get; set; }
+        public String Location { get; set; }
+        public DateTime DateAdded { get; set; }
 
-        public virtual Profile Profile { get; set; }
     }
 }

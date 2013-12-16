@@ -13,7 +13,10 @@ namespace Socialnet.Controllers
         SocialContext _db = new SocialContext();
         public ActionResult Index()
         {
-           return View(new User());
+            if (Request.IsAuthenticated)
+                return View("Index");
+            else
+                return View("Login",new User());
         }
 
         public ActionResult Login(User user)
@@ -22,7 +25,8 @@ namespace Socialnet.Controllers
             {
                 if (isValidUser(user.Username, user.Password))
                 {
-                    FormsAuthentication.SetAuthCookie("username", true);
+                    _db.SetCurrentUserId(user.Username);
+                    FormsAuthentication.SetAuthCookie(user.Username, true);
                     return RedirectToAction("Index", "Profile");
                 }
                 else
@@ -35,7 +39,11 @@ namespace Socialnet.Controllers
             return View("Index");
         }
 
-
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index","Home");
+        }
         public ActionResult Register(User user)
         {
             if (ModelState.IsValid)
@@ -59,7 +67,7 @@ namespace Socialnet.Controllers
 
         public bool isValidUser(String Username, String Password)
         {
-            var user = _db.Users.FirstOrDefault(m => m.Username==Username && m.Password == Password);
+            var user = _db.Users.FirstOrDefault(m=>m.Username==Username && m.Password==Password);
             if (user != null )
             {
                 return true;

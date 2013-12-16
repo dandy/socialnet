@@ -1,42 +1,22 @@
-﻿@using Socialnet.Models;
-@model User
+﻿@model Socialnet.Models.ProfileViewModel
 
 @{
     ViewBag.Title = "Index";
 }
-<div class="center">
-@using (Html.BeginForm("Login", "Home", FormMethod.Post)){
-    @Html.ValidationSummary(true, "Login failed. Check your login credentials");
-    <p>
-    @Html.LabelFor(m => m.Username)<br />
-    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-    @Html.ValidationMessageFor(m => m.Username)
-    </p>
-    
-    <p>
-    @Html.LabelFor(m => m.Password)<br />
-    @Html.PasswordFor(m => m.Password,new { @class = "form-control" })
-    </p>
-    <input type="submit" class="btn" />
+
+<h2>Index</h2>
+<h3>@Html.ActionLink("Friends", "Friends")</h3>
+
+@foreach (Socialnet.Models.Photo photo in Model.UserPhotos)
+{
+    <img src="@Url.Content("~/images/"+photo.Location)" height="100" width="100" />
+
 }
 
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register here</button>
-        </div>
-
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Register Here</h4>
-      </div>
-      <div class="modal-body">
-            @Html.Partial("Register")
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+@using (Html.BeginForm("FileUpload", "Profile", FormMethod.Post, 
+                            new { enctype = "multipart/form-data" }))
+{  
+    <label for="file">Upload Image:</label> 
+    <input type="file" name="file" id="file" style="width: 100%;" /> 
+    <input type="submit" value="Upload" class="submit" /> 
+}

@@ -1,11 +1,17 @@
-﻿@model Socialnet.Models.Profile
+﻿@model Socialnet.Models.ProfileViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+<h3>@Html.ActionLink("Friends", "Friends")</h3>
 
+@foreach (Socialnet.Models.Photo photo in Model.UserPhotos)
+{
+    <img src="@Url.Content("~/images/"+photo.Location)" height="100" width="100" />
+
+}
 
 @using (Html.BeginForm("FileUpload", "Profile", FormMethod.Post, 
                             new { enctype = "multipart/form-data" }))

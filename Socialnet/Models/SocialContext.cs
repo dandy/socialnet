@@ -14,5 +14,19 @@ namespace Socialnet.Models
 
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<Friend> Friends { get; set; }
+        public int CurrentUser { get; set; }
+        public void GetUserId(String UserName)
+        {
+           
+
+        }
+
+        internal void SetCurrentUserId(string p)
+        {
+            var User = Users.FirstOrDefault(u => u.Username == p);
+            CurrentUser = User.UserId;
+        }
     }
 }

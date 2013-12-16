@@ -16,5 +16,17 @@ namespace Socialnet.Models
         public String Password { get; set; }
         public String Email { get; set; }
         public DateTime Date { get; set; }
+
+        public virtual ICollection<Friend> Friends { get; set; }
     }
+
+    public class Friend
+    {
+        public int UserId { get; set; }
+        public int FriendId { get; set; }
+        public DateTime FriendshipDate { get; set; }
+
+    }
+
+   
 }

@@ -8,7 +8,7 @@ namespace Socialnet.Models
     public class Profile
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string Username { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String ProfilePicture { get; set; }
@@ -19,8 +19,9 @@ namespace Socialnet.Models
 
     public class ProfileViewModel
     {
-        public User User { get; set; }
-        public Photo Photos { get; set; }
+        public Profile UserProfile { get; set; }
+        public List<Photo>
+            UserPhotos { get; set; }
 
     }
 

@@ -21,8 +21,7 @@ namespace Socialnet
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
-                        "~/Scripts/bootstrap.min.js"));
+           
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -41,10 +40,7 @@ namespace Socialnet
                 Orderer = new CustomBundleOrderer()
             };
 
-            bundle.Include("~/Content/bootstrap.min.css");
-            bundle.Include("~/Content/bootstrap-theme.min.css");
             bundles.Add(bundle);
-           
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

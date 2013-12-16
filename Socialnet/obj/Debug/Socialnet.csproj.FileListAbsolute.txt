@@ -26,7 +26,6 @@ F:\projects\vsprojects\Socialnet\Socialnet\bin\System.Web.Razor.xml
 F:\projects\vsprojects\Socialnet\Socialnet\bin\System.Web.WebPages.xml
 F:\projects\vsprojects\Socialnet\Socialnet\bin\System.Web.WebPages.Deployment.xml
 F:\projects\vsprojects\Socialnet\Socialnet\bin\System.Web.WebPages.Razor.xml
-F:\projects\vsprojects\Socialnet\Socialnet\obj\Debug\Socialnet.csprojResolveAssemblyReference.cache
 F:\projects\vsprojects\Socialnet\Socialnet\obj\Debug\Socialnet.dll
 F:\projects\vsprojects\Socialnet\Socialnet\obj\Debug\Socialnet.pdb
 F:\projects\vsprojects\Socialnet\Socialnet\bin\x86\sqlcese40.dll
@@ -52,3 +51,4 @@ F:\projects\vsprojects\Socialnet\Socialnet\bin\EntityFramework.SqlServerCompact.
 F:\projects\vsprojects\Socialnet\Socialnet\bin\System.Data.SqlServerCe.dll
 F:\projects\vsprojects\Socialnet\Socialnet\bin\EntityFramework.SqlServer.xml
 F:\projects\vsprojects\Socialnet\Socialnet\bin\EntityFramework.SqlServerCompact.xml
+F:\projects\vsprojects\Socialnet\Socialnet\obj\Debug\Socialnet.csprojResolveAssemblyReference.cache
