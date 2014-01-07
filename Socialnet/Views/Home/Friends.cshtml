@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Socialnet.Models.Profile>
+
+
+@{
+    ViewBag.Title = "My friends";
+}
+
+<h2>My friends</h2>
+
+@foreach (Socialnet.Models.Profile friend in Model)
+{
+   <text>friend name is </text>@friend.FirstName<text> </text> @friend.LastName <br />
+                                                     
+   <a href="@Url.Action("ShowUserProfile","Profile",new {username=friend.Username})">
+       <img src="~/images/@friend.ProfilePicture" height="100" />
+    </a>
+<hr />
+
+}

@@ -1,11 +1,12 @@
 ﻿@using Socialnet.Models;
-@model User
+@model LoginViewModel
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Login.cshtml";
 }
 <div class="loginForm">
+
 @using (Html.BeginForm("Login", "Home", FormMethod.Post)){
     @Html.ValidationSummary(true, "Login failed. Check your login credentials");
     <p>
@@ -17,27 +18,51 @@
     <p>
     @Html.LabelFor(m => m.Password)<br />
     @Html.PasswordFor(m => m.Password,new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Password)
+
     </p>
-    <input type="submit" class="btn" />
+    <input type="submit" class="btn" value="Login"/>
 }
     </div>
+@section scripts{
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/0.8.9/jquery.magnific-popup.min.js">
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register here</button>
-        </div>
 
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Register Here</h4>
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('.register_form_btn').magnificPopup({
+                type: 'inline'
+            });
+
+            $("#register_form").submit(function (e) {
+                e.preventDefault();
+
+                if ($(this).valid()) {
+                    $.post("Home/Register", $(this).serialize(),
+                        function (data) {
+
+                            $("#register_form_div").html("You have been now registered. You can login now");
+                           // alert(data);
+                            console.log(data);
+                        });
+                }
+
+            });
+
+
+        });
+
+    </script>
+
+}
+
+<a href="#register_form_div" class="register_form_btn">Register here</a>
+
+<div id="register_form_div" class="white-popup mfp-hide">
+            @Html.Partial("Register", new RegisterViewModel())
       </div>
-      <div class="modal-body">
-            @Html.Partial("Register")
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+      

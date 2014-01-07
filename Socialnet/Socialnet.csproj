@@ -141,16 +141,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HelperMethods.cs" />
+    <Compile Include="Models\StatusMessage.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\SocialContext.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\social.sdf" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\magnific.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -205,12 +207,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\tmpl.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Views\Profile\Friends.cshtml" />
-    <Content Include="Views\Profile\Show.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Home\Friends.cshtml" />
+    <Content Include="Views\Profile\AddFriend.cshtml" />
+    <Content Include="Views\Profile\MakeFriends.cshtml" />
+    <Content Include="Views\Profile\EditProfile.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -256,7 +261,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\ShowUserProfile.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />

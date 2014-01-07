@@ -9,11 +9,19 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <h1>@Html.ActionLink("Logout", "Logout", "Home")</h1>
+    <h2>@Html.ActionLink("Logout", "Logout", "Home")</h2>
+
+    <ul id="main-nav">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("My profile", "ShowUserProfile", "Profile", new { username = User.Identity.Name }, null)</li>
+        <li>@Html.ActionLink("Friends", "Friends", "Home")</li>
+        <li>@Html.ActionLink("Edit profile","EditProfile","Profile")</li>
+
+    </ul>
+
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

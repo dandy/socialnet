@@ -13,11 +13,11 @@ namespace Socialnet
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
-               name: "Profile",
-               url: "Profile/{username}",
-               defaults: new { controller = "Profile", action = "show" },
-               constraints: new { username = "Friends"}
-               );
+                name: "UserProfiles",
+                url: "u/{username}",
+                defaults: new { controller = "Profile", action = "ShowUserProfile", username = UrlParameter.Optional }
+                );
+           
 
             routes.MapRoute(
                 name: "Default",
