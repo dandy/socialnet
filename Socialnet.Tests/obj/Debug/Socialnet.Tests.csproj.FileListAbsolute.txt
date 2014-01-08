@@ -31,3 +31,6 @@ F:\projects\vsprojects\Socialnet\Socialnet.Tests\obj\Debug\Socialnet.Tests.dll
 F:\projects\vsprojects\Socialnet\Socialnet.Tests\obj\Debug\Socialnet.Tests.pdb
 F:\projects\vsprojects\Socialnet\Socialnet.Tests\bin\Debug\EntityFramework.dll
 F:\projects\vsprojects\Socialnet\Socialnet.Tests\bin\Debug\EntityFramework.xml
+F:\projects\vsprojects\Socialnet\Socialnet.Tests\bin\Debug\Microsoft.AspNet.SignalR.Core.dll
+F:\projects\vsprojects\Socialnet\Socialnet.Tests\bin\Debug\Owin.dll
+F:\projects\vsprojects\Socialnet\Socialnet.Tests\bin\Debug\Microsoft.AspNet.SignalR.Core.xml

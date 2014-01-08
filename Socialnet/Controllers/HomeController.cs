@@ -37,7 +37,7 @@ namespace Socialnet.Controllers
                     {
                         StoryComments = _db.Comments.Where(m=>m.PostId==p.PhotoId).ToList(),
                         PostedOn = p.DatePosted,
-                        StoryType = "Photo",
+                        StoryType = "photo",
                         FeedEntry = p.Location,
                         UserDisplayName = dbQuery.FirstName +" "+ dbQuery.LastName,
                         UserDisplayPicture = dbQuery.ProfilePicture,

@@ -52,3 +52,14 @@ F:\projects\vsprojects\Socialnet\Socialnet\bin\System.Data.SqlServerCe.dll
 F:\projects\vsprojects\Socialnet\Socialnet\bin\EntityFramework.SqlServer.xml
 F:\projects\vsprojects\Socialnet\Socialnet\bin\EntityFramework.SqlServerCompact.xml
 F:\projects\vsprojects\Socialnet\Socialnet\obj\Debug\Socialnet.csprojResolveAssemblyReference.cache
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.AspNet.SignalR.Core.dll
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.Owin.dll
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.Owin.Security.dll
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Owin.dll
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.AspNet.SignalR.Core.xml
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.Owin.xml
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\projects\vsprojects\Socialnet\Socialnet\bin\Microsoft.Owin.Security.xml

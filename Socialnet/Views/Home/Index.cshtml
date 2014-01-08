@@ -52,7 +52,7 @@
             }
             <div class="posted_on">@Html.GetPrettyDate(feed.PostedOn)</div>
 
-                <div class="comments">
+                <div class="comments" id="@(feed.StoryType+"_"+feed.PostId)">
                     
                     @foreach (Socialnet.Models.Comment c in feed.StoryComments)
                     {
@@ -83,14 +83,27 @@
 
 @section scripts{
     <script type="text/javascript" src="~/Content/tmpl.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.signalR-2.0.1.min.js"></script>
+    <script type="text/javascript" src="~/Signalr/hubs"></script>
     <script type="text/javascript">
 
         var markup = "<div class=comment><div class=comment_text>${commentText}</div><div class=comment_from>${username}</div><div class=comment_postedon>Just Now</div></div>";
+        $.template("commentTemplate", markup);
 
-                            $.template("commentTemplate",markup);
-            $(document).on("submit", "form.commentForm", function (event) {
-                event.preventDefault();
-                var resultDiv = $(this).parent().find(".comments");
+        $(document).ready(function () {
+
+            var hub = $.connection.commentshub;
+            hub.client.sendnotification = function (result, resultDiv) {
+              //  alert(result.username);
+                console.log(resultDiv);
+                $.tmpl("commentTemplate", result).appendTo("#"+resultDiv);
+            }
+
+            $.connection.hub.start().done(function () {
+
+                $(document).on("submit", "form.commentForm", function (event) {
+                    event.preventDefault();
+                    var resultDiv = $(this).parent().find(".comments").attr("id");
                     $.ajax({
                         url: this.action,
                         type: this.method,
@@ -98,14 +111,23 @@
                         success: function (result) {
                             var results = $.parseJSON(result);
                             console.log(result);
-                            $.tmpl("commentTemplate",result).appendTo(resultDiv);
-                            
+
+                            hub.server.sendCommentNotification(result, resultDiv);
+
+
                         }
                     });
-                
-                return false;
+
+                    return false;
+
+                });
+
 
             });
+        });
+
+       
+            
 
 
     </script>
