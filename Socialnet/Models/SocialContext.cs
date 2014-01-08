@@ -9,7 +9,7 @@ namespace Socialnet.Models
     public class SocialContext : DbContext
     {
         public SocialContext()
-            : base("DefaultConnection")
+            : base("SocialNetConnection")
         {
 
         }
