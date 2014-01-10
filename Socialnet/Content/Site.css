@@ -1,25 +1,8 @@
 ﻿body {
-    font-family:Arial, sans-serif;
+font-family: 'Open Sans', sans-serif;
     font-size:13px;
 }
-.block {
-  text-align: center;
-  background: #c0c0c0;
-  border: #a0a0a0 solid 1px;
-  margin: 20px;
-}
- 
-.block:before {
-  content: '';
-  display: inline-block;
-  height: 100%; 
-  vertical-align: middle;
-  margin-right: -0.25em; /* Adjusts for spacing */
-    
-  /* For visualization 
-  background: #808080; width: 5px;
-  */
- }
+
  
 .centered {
   display: inline-block;
@@ -51,6 +34,7 @@
 input[type=text], input[type=password] {
     background-color: #ECECEC;
 border: 0 none;
+font-family:'open sans';
 border-radius: 4px;
 color: #666666;
 font-size: 18px;
@@ -129,4 +113,10 @@ width: 100px;
 }
 .posted_on {
     font-family: 12px;
+}
+.loginForm {
+    width: 340px;
+}
+.quick_login {
+    float: right;
 }

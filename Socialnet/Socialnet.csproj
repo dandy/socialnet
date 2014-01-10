@@ -229,6 +229,18 @@
     <Content Include="Content\tmpl.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\1367759162.jpg" />
+    <Content Include="images\1381460_10152704640225021_2049592655_n.jpg" />
+    <Content Include="images\1424321_10152821037775021_1182489136_n.jpg" />
+    <Content Include="images\1450154_10152827441415021_1384309770_n.jpg" />
+    <Content Include="images\544769_10151880848578569_1462167674_n.jpg" />
+    <Content Include="images\62.jpg" />
+    <Content Include="images\abstract-background-01.jpg" />
+    <Content Include="images\Desert.jpg" />
+    <Content Include="images\F 21012-PP=4.JPG" />
+    <Content Include="images\Grenier_cartoon.jpg" />
+    <Content Include="images\portrait.jpg" />
+    <Content Include="images\wooden-background.png" />
     <Content Include="Scripts\jquery.signalR-2.0.1.js" />
     <Content Include="Scripts\jquery.signalR-2.0.1.min.js" />
     <Content Include="Views\Home\Login.cshtml" />
@@ -237,6 +249,8 @@
     <Content Include="Views\Profile\AddFriend.cshtml" />
     <Content Include="Views\Profile\MakeFriends.cshtml" />
     <Content Include="Views\Profile\EditProfile.cshtml" />
+    <None Include="Properties\PublishProfiles\socialnetwork - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\socialnetwork - Web Deploy.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

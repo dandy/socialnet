@@ -143,9 +143,15 @@ namespace Socialnet.Controllers
 
         public ActionResult Login()
         {
-           
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
 
-            return View(new LoginViewModel());
+                return View(new LoginViewModel());
+            }
         }
 
         [HttpPost]

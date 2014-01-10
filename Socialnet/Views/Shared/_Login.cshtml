@@ -7,17 +7,14 @@
 
         @Styles.Render("~/Content/Site.css")
     <link rel="stylesheet" href="~/Content/magnific.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 
-    <div class="block" style="height: 600px;">
+                        @RenderBody()
 
-        <div class="centered">
-            @RenderBody()
-
-        </div>
-
-    </div>
+   
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)

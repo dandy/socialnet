@@ -1,0 +1,30 @@
+﻿@model Socialnet.Models.RegisterViewModel
+<h2>Register here </h2>
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post, new { id = "register_form" }))
+{
+    @Html.ValidationSummary()
+    <div>
+        @Html.LabelFor(m => m.UserDetails.Username)
+        @Html.TextBoxFor(m => m.UserDetails.Username, new { placeholder = "Username"})
+    </div>
+    <div>
+    @Html.LabelFor(m => m.UserDetails.Password)
+    @Html.PasswordFor(m => m.UserDetails.Password)
+    </div>
+    <div>
+    @Html.LabelFor(m => m.UserDetails.Email)
+    @Html.TextBoxFor(m => m.UserDetails.Email)
+    </div>
+    <div>
+     @Html.LabelFor(m => m.UserProfile.FirstName)
+    @Html.TextBoxFor(m => m.UserProfile.FirstName)
+    </div>
+    <div>
+      @Html.LabelFor(m => m.UserProfile.LastName)
+       @Html.TextBoxFor(m => m.UserProfile.LastName)
+    </div>
+    <div>
+        <input type="submit" value="Register" id="register_submit" />
+    </div>
+}

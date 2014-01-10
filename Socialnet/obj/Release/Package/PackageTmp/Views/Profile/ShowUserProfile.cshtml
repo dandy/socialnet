@@ -1,0 +1,68 @@
+﻿@model Socialnet.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = ViewData["name"] +" profile";
+}
+
+<h2>@ViewData["name"] profile</h2>
+<img src="~/images/@Model.UserProfile.ProfilePicture" height="100" />
+<br />First name: @Model.UserProfile.FirstName <br /> Last name: @Model.UserProfile.LastName
+<br />
+<br />
+@foreach (Socialnet.Models.Photo photo in Model.UserPhotos)
+{
+    <img src="@Url.Content("~/images/"+photo.Location)" height="100" width="100" />
+
+}
+
+<h3>@ViewData["name"] status messages</h3>
+@foreach (Socialnet.Models.StatusMessage Status in Model.UserStatusMessages)
+{
+    @Status.DatePosted.ToShortDateString() <span>:</span> @Status.Status
+                           <br /><br />
+}
+
+@if (User.Identity.Name == ViewData["name"].ToString())
+{
+using(Html.BeginForm("FileUpload", "Profile", FormMethod.Post,new { enctype = "multipart/form-data" }))
+{  
+    <label for="file">Upload Image:</label> 
+    <input type="file" name="file" id="file" style="width: 100%;" /> 
+    <input type="submit" value="Upload" class="submit" /> 
+}
+}
+<br />
+@if (User.Identity.Name != ViewData["name"].ToString()){
+@Ajax.ActionLink("Add Friend", "AddFriend", new { newFriendId = ViewData["name"] }, new AjaxOptions
+{
+    HttpMethod = "POST",     //Do a HTTP Post
+    InsertionMode = InsertionMode.Replace,  //Replace content
+    UpdateTargetId = "AddFriendLinks",    //Target el
+    OnComplete="setUp",
+    
+
+}, new { id = "AddFriendLink" }
+
+)
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+    <script type="text/javascript">
+
+        function setUp(data) {
+            var json_x = $.parseJSON(data.responseText);
+            
+            if (json_x.d == 1) {
+                $("#AddFriendLink").html("Friend request sent");
+            } else {
+                $("#AddFriendLink").html("Friend request not sent");
+            }
+
+        }
+
+</script>
+
+}
+<div id="texta"></div>
