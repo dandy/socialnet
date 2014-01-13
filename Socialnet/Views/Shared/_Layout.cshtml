@@ -10,20 +10,65 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400' rel='stylesheet' type='text/css'>
 
 </head>
-<body>
-    <h2>@Html.ActionLink("Logout", "Logout", "Home")</h2>
+    @functions{
 
-    <ul id="main-nav">
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("My profile", "ShowUserProfile", "Profile", new { username = User.Identity.Name }, null)</li>
-        <li>@Html.ActionLink("Friends", "Friends", "Home")</li>
-        <li>@Html.ActionLink("Edit profile","EditProfile","Profile")</li>
+    public string ViewName()
+        {
+            return ViewContext.RouteData.GetRequiredString("action");
+        }
+        
+        public string SetClass(string action, string linkAction){
+            
+            if(action==linkAction){
+                return " selected";   
+            }else{
+                return "";
+            }
+        }
+    
+    }
+    @{
+        var actionName = ViewName();
 
-    </ul>
+        
+    }
+<body class="@actionName">
+        <div id="main_nav_wrapper">
+            <div id="ul_wrapper">
+                <div class="logo">
+                    <h1 style="margin:0px;">
+                        <a href="/">
+                            <img src="~/images/logo.png" alt="SocialE" /></a>
+                    </h1>
 
-    @RenderBody()
+                </div>
+                <div class="navigation">
+                    <ul id="main_nav">
+                        <li class="@SetClass(actionName, "Index")">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="@SetClass(actionName, "ShowUserProfile")" >@Html.ActionLink("My profile", "ShowUserProfile", "Profile", new { username = User.Identity.Name }, null)</li>
+                        <li class="@SetClass(actionName, "Friends")">@Html.ActionLink("Friends", "Friends", "Home")</li>
+                        <li class="@SetClass(actionName, "EditProfile")">@Html.ActionLink("Edit profile", "EditProfile", "Profile")</li>
+                        <li class="@SetClass(actionName, "Logout")">@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    <div class="wrapper">
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+        @RenderBody()
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var bodyClass = $("body").attr("class").toLowerCase();
+                $("#main_nav li." + bodyClass + "").addClass("current_page");
+
+            });
+        </script>
+    </div>
 </body>
 </html>

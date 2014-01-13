@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Socialnet.Models;
+using System.Data.Entity;
 
 namespace Socialnet.Controllers
 {
@@ -61,21 +62,29 @@ namespace Socialnet.Controllers
             return View(profileModel);
         }
         [HttpPost]
-        public ActionResult EditProfile(Profile profile, HttpPostedFileBase ProfilePic)
+        public ActionResult EditProfile(Profile profile, HttpPostedFileBase ProfilePic, FormCollection frm)
         {
             if (ModelState.IsValid)
             {
                 profile.Username = User.Identity.Name;
 
-                string pic = System.IO.Path.GetFileName(ProfilePic.FileName);
-                string path = System.IO.Path.Combine(
-                Server.MapPath("~/images"), pic);
-                // file is uploaded
-                ProfilePic.SaveAs(path);
+                if (ProfilePic != null)
+                {
+                    string pic = System.IO.Path.GetFileName(ProfilePic.FileName);
 
-                profile.ProfilePicture = pic;
+                    string path = System.IO.Path.Combine(
+                    Server.MapPath("~/images"), pic);
+                    // file is uploaded
+                    ProfilePic.SaveAs(path);
 
-                _db.Profiles.Add(profile);
+                    profile.ProfilePicture = pic;
+
+                }
+                else
+                {
+                    profile.ProfilePicture = frm["CurrentProfilePic"];
+                }
+                _db.Entry(profile).State = EntityState.Modified;                
                 _db.SaveChanges();
             }
             else
@@ -87,7 +96,7 @@ namespace Socialnet.Controllers
             // directly to database
             // in-case if you want to store byte[] ie. for DB
 
-            return View();
+            return View(profile);
         }
 
         public ActionResult MakeFriends(String user, String Friend)

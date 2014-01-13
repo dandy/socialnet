@@ -4,16 +4,15 @@
     ViewBag.Title = "Edit Profile";
 }
 
-<h2>EditProfile</h2>
+<h2>Edit your profile</h2>
 
 @using(Html.BeginForm("EditProfile", "Profile", FormMethod.Post,new { enctype = "multipart/form-data" })){
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Profile</legend>
 
-
+        <input type="hidden" name="@Html.NameFor(model=>model.ProfileId)" value="@Html.ValueFor(model=>model.ProfileId)" />
+        <input type="hidden" name="CurrentProfilePic" value="@Html.ValueFor(m=>m.ProfilePicture)" />
 
         <div class="editor-label">
             @Html.LabelFor(model => model.FirstName)
@@ -35,21 +34,38 @@
             @Html.LabelFor(model => model.ProfilePicture)
         </div>
         <div class="editor-field">
-            <input type="file" name="ProfilePic" id="ProfilePictureID" /> 
-
+            <input type="file" name="ProfilePic" id="ProfilePictureID" /> <br />
+            <img id="profile_pic_img" src="~/images/@Html.ValueFor(m=>m.ProfilePicture)" width="200"/>
             @Html.ValidationMessageFor(model => model.ProfilePicture)
         </div>
 
         <p>
             <input type="submit" value="Save" />
         </p>
-    </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profile_pic_img').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#ProfilePictureID").change(function () {
+            readURL(this);
+        });
+
+    </script>
 }

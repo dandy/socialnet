@@ -6,23 +6,21 @@
     Layout = "~/Views/Shared/_Login.cshtml";
 }
 <div class="loginForm">
-
+    <div style="text-align:center">
+        <img src="~/images/logo.png" />
+    </div>
 @using (Html.BeginForm("Login", "Home", FormMethod.Post)){
     @Html.ValidationSummary(true, "Login failed. Check your login credentials");
-    <p>
-    @Html.LabelFor(m => m.Username)<br />
-    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder="Username" })
     @Html.ValidationMessageFor(m => m.Username)
-    </p>
     
-    <p>
-    @Html.LabelFor(m => m.Password)<br />
-    @Html.PasswordFor(m => m.Password,new { @class = "form-control" })
+    @Html.PasswordFor(m => m.Password,new { @class = "form-control", placeholder="password" })
     @Html.ValidationMessageFor(m => m.Password)
 
-    </p>
     <input type="submit" class="btn" value="Login"/>
 }
+    <a href="#register_form_div" class="register_form_btn btn">Register here</a>
+
     </div>
 @section scripts{
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/0.8.9/jquery.magnific-popup.min.js">
@@ -33,6 +31,9 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+ 
+            $(".loginForm").center();
 
             $('.register_form_btn').magnificPopup({
                 type: 'inline'
@@ -56,11 +57,27 @@
 
         });
 
+        jQuery.fn.center = function () {
+            return this.each(function () {
+                var el = $(this);
+                var h = el.height();
+                var w = el.width();
+                var w_box = $(window).width();
+                var h_box = $(window).height();
+                var w_total = (w_box - w) / 2; //400
+                var h_total = (h_box - h) / 2;
+                var css = {
+                    "position": 'absolute', "left": w_total + "px", "top":
+        h_total + "px"
+                };
+                el.css(css)
+            });
+        };
+
     </script>
 
 }
 
-<a href="#register_form_div" class="register_form_btn">Register here</a>
 
 <div id="register_form_div" class="white-popup mfp-hide">
             @Html.Partial("Register", new RegisterViewModel())

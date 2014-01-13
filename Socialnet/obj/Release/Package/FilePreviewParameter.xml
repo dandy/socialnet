@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="socialnetwork" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="sociale" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^F:\\projects\\vsprojects\\Socialnet\\Socialnet\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^F:\\projects\\vsprojects\\Socialnet\\Socialnet\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="SocialNetConnection-Web.config Connection String" description="" value="Server=dfd77014-284b-4232-84a5-a2ad014ee214.sqlserver.sequelizer.com;Database=dbdfd77014284b423284a5a2ad014ee214;User ID=npwyisrbagsfhqty;Password=BPKKEjBEaYiZLq3wpksTFY28BCAZ4kdFtWB7W3Awhv7DHYySvv6hvbALVLicQKJW;" tags="">
+  <parameter name="SocialNetConnection-Web.config Connection String" description="" value="Data Source=sql02.cytanium.com;Initial Catalog=Sql;User ID=admins;Password=Admins1234;Asynchronous Processing=True" tags="">
     <parameterEntry kind="XmlFile" scope="F:\\projects\\vsprojects\\Socialnet\\Socialnet\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SocialNetConnection']/@connectionString" />
   </parameter>
 </parameters>

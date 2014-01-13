@@ -6,7 +6,9 @@ using System.Web.Mvc;
 namespace Socialnet.Helpers
 {
     public static class HelperMethods
-    {   
+    {
+        
+
          public static String GetPrettyDate(this HtmlHelper helper, DateTime d)
             {
                 // 1.

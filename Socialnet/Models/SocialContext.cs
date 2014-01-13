@@ -41,5 +41,12 @@ namespace Socialnet.Models
         }
 
 
+
+        internal string GetUserDisplayName(string Username)
+        {
+            var User = Profiles.FirstOrDefault(u => u.Username == Username);
+            return User.FirstName +" "+ User.LastName;
+            throw new NotImplementedException();
+        }
     }
 }

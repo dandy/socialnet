@@ -3,96 +3,101 @@
 @{
     ViewBag.Title = "Home | SocialNet";
 }
-<h2>Welcome : @ViewData["username"]
-     </h2>
-@if (@Model.UserProfile != null)
-{
-<img src="~/images/@Model.UserProfile.ProfilePicture" height="100" />
-}
-<h2>Home</h2>
-
+<h3 class="welcome">Welcome : @ViewData["displayName"]</h3>
 <div class="friend_requests">You have @Model.MyFriendRequests.Count new friend requests</div> 
 
 @foreach (Socialnet.Models.FriendRequest Request in Model.MyFriendRequests)
 {
-    
-    @Html.ActionLink("Add " + Request.Username + " as friend", "MakeFriends", "Profile", new { user = Request.Username, Friend = Request.WantsFriend }, null)
-    
+    @Html.ActionLink("Add " + Request.Username + " as friend", "MakeFriends", "Profile", new { user = Request.Username, Friend = Request.WantsFriend }, null)   
 }
 
-
-<h3>Post status</h3>
-
-@using (Html.BeginForm("PostStatus", "Home", FormMethod.Post))
+@if (@Model.UserProfile != null)
 {
-    @Html.LabelFor(m => m.StatusMessage.Status);
-    @Html.TextBoxFor(m => m.StatusMessage.Status);
-    
-    @Html.HiddenFor(m => m.StatusMessage.Username)
-    
-    <input type="submit" value="Post status" />
-
+    <!-- <div class="profile_picture">
+        <img src="~/images/@Model.UserProfile.ProfilePicture" height="100" />
+    </div> --> 
 }
 
+<div id="post_share">
+@using (Html.BeginForm("PostStatus", "Home", FormMethod.Post, new { id = "post_share_form" }))
+{
+    @Html.TextBoxFor(m => m.StatusMessage.Status, new { placeholder = "Share something here..." });
+    @Html.HiddenFor(m => m.StatusMessage.Username)
+    <input type="submit" value="Share" style="display:block; margin:0px" />
+}
+    </div>
+<div class="clear"></div>
 <h3>News Feed</h3>
-
+<div id="news_feed_wrapper">
 @foreach (Socialnet.Models.NewsFeed feed in Model.UserFeeds)
 {
     <div class="news_feed">
-        <div class="user_pic"><img src="~/images/@feed.UserDisplayPicture" height="50" width="50" /></div>
+
+        <div class="user_pic">
+            <img src="~/images/@feed.UserDisplayPicture" height="50" width="50" /></div>
         <div class="feed_content">
             <div class="user_display_name">@feed.UserDisplayName</div>
             @if (feed.StoryType == "status")
             {
-            <div class="feed_story">@feed.FeedEntry</div>
+                <div class="feed_story">@feed.FeedEntry</div>
             }
             else
             {
                 <img src="~/images/@feed.FeedEntry" height="200" />
             }
             <div class="posted_on">@Html.GetPrettyDate(feed.PostedOn)</div>
+            <a href="#" class="show_comments_link">@feed.StoryComments.Count comments</a>
+            <div class="comments" id="@(feed.StoryType + "_" + feed.PostId)">
 
-                <div class="comments" id="@(feed.StoryType+"_"+feed.PostId)">
-                    
-                    @foreach (Socialnet.Models.Comment c in feed.StoryComments)
-                    {
-                        <div class="comment">
-                            <div class="comment_text">@c.Text</div>
-                            <div class="comment_from">@c.Username</div>
-                            <div class="comment_postedon">@Html.GetPrettyDate(c.DatePosted)</div>
-                        </div>
+                @foreach (Socialnet.Models.Comment c in feed.StoryComments)
+                {
+                    <div class="comment">
+                        <div class="comment_from">@c.Username <span class="comment_postedon">@Html.GetPrettyDate(c.DatePosted)</span></div>
+                        <div class="comment_text">@c.Text</div>
+                    </div>
                     }
-                </div>
-                    @using (Html.BeginForm("PostComment", "Home", FormMethod.Post, new { @class = "commentForm" }))
-                    {
-                    <text>Post comment <br /></text>
-                        <input type="hidden" name="@Html.NameFor(m => m.PostComment.PostId)" value="@feed.PostId" />
+            </div>
+            @using (Html.BeginForm("PostComment", "Home", FormMethod.Post, new { @class = "commentForm" }))
+            {
+                <input type="hidden" name="@Html.NameFor(m => m.PostComment.PostId)" value="@feed.PostId" />
 
-                        @Html.TextBoxFor(m => m.PostComment.Text)
+                @Html.TextAreaFor(m => m.PostComment.Text, new { placeholder = "Write a comment..." })
                         
-                        <input type="submit" value="Post Comment" />
-                        <div class="result"></div>
+                <input type="submit" value="Post Comment" />
+                <div class="result"></div>
                     }
-                
-            
+
+
 
         </div>
-        <div class="clearLeft"></div> 
+        <div class="clearLeft"></div>
     </div>
 }
-
+    </div>
 @section scripts{
     <script type="text/javascript" src="~/Content/tmpl.js"></script>
     <script type="text/javascript" src="~/Scripts/jquery.signalR-2.0.1.min.js"></script>
     <script type="text/javascript" src="~/Signalr/hubs"></script>
     <script type="text/javascript">
 
-        var markup = "<div class=comment><div class=comment_text>${commentText}</div><div class=comment_from>${username}</div><div class=comment_postedon>Just Now</div></div>";
-        $.template("commentTemplate", markup);
-
         $(document).ready(function () {
+            $(".show_comments_link").click(function (e) {
+                e.preventDefault();
+                $(this).next(".comments").toggle();
+            });
+        });
 
+        var markup = "<div class=comment><div class=comment_text>${commentText}</div><div class=comment_from>${username}</div><div class=comment_postedon>Just Now</div></div>";
+        var statusMarkup = "";
+
+        $.template("commentTemplate", markup);
+        $.template("statusTemplate", statusMarkup);
+        $(document).ready(function () {
             var hub = $.connection.commentshub;
+
+            hub.client.addstatusclient = function () {
+
+            };
             hub.client.sendnotification = function (result, resultDiv) {
               //  alert(result.username);
                 console.log(resultDiv);
@@ -100,6 +105,27 @@
             }
 
             $.connection.hub.start().done(function () {
+
+                $(document).on("submit", "#post_share_form", function (event) {
+                    event.preventDefault();
+
+                    $.ajax({
+                        url: this.action,
+                        type: this.method,
+                        data: $(this).serialize(),
+                        success: function (result) {
+                            var results = $.parseJSON(result);
+                            console.log(result);
+
+                            hub.server.sendCommentNotification(result, resultDiv);
+
+
+                        }
+                    });
+
+                    return false;
+
+                });
 
                 $(document).on("submit", "form.commentForm", function (event) {
                     event.preventDefault();

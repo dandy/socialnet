@@ -5,24 +5,19 @@
 {
     @Html.ValidationSummary()
     <div>
-        @Html.LabelFor(m => m.UserDetails.Username)
         @Html.TextBoxFor(m => m.UserDetails.Username, new { placeholder = "Username"})
     </div>
     <div>
-    @Html.LabelFor(m => m.UserDetails.Password)
-    @Html.PasswordFor(m => m.UserDetails.Password)
+    @Html.PasswordFor(m => m.UserDetails.Password, new { placeholder = "Password"})
     </div>
     <div>
-    @Html.LabelFor(m => m.UserDetails.Email)
-    @Html.TextBoxFor(m => m.UserDetails.Email)
+    @Html.TextBoxFor(m => m.UserDetails.Email , new { placeholder = "Email"})
     </div>
     <div>
-     @Html.LabelFor(m => m.UserProfile.FirstName)
-    @Html.TextBoxFor(m => m.UserProfile.FirstName)
+    @Html.TextBoxFor(m => m.UserProfile.FirstName, new { placeholder = "First name"})
     </div>
     <div>
-      @Html.LabelFor(m => m.UserProfile.LastName)
-       @Html.TextBoxFor(m => m.UserProfile.LastName)
+       @Html.TextBoxFor(m => m.UserProfile.LastName, new { placeholder = "Last name"})
     </div>
     <div>
         <input type="submit" value="Register" id="register_submit" />

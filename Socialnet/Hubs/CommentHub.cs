@@ -18,7 +18,12 @@ namespace Socialnet.Hubs
     {
         public void SendCommentNotification(CommentDivData result, dynamic resultDiv   )
         {
-            Clients.Others.sendnotification(result, resultDiv);
+            Clients.All.sendnotification(result, resultDiv);
+        }
+
+        public void AddStatus(CommentDivData result, dynamic resultDiv)
+        {
+            Clients.All.addstatusclient(result, resultDiv);
         }
     }
 }

@@ -84,8 +84,7 @@ namespace Socialnet.Controllers
                 };
 
                 ViewData["username"] = User.Identity.Name;
-                ViewData["myname"] = "ijlal";
-                ViewBag.username = User.Identity.Name;
+                ViewData["displayName"] = _db.GetUserDisplayName(User.Identity.Name);
                 return View(model);
 
             }
@@ -123,10 +122,12 @@ namespace Socialnet.Controllers
                 StatusEntry.StatusMessage.DatePosted = DateTime.Now;
                 _db.StatusMessages.Add(StatusEntry.StatusMessage);
                 _db.SaveChanges();
+                return Json(new { status=1, statusData = StatusEntry });
             }
             else
             {
                 ModelState.AddModelError("", "Something went wrong. Status can not be posted right now");
+                return Json(new { status = 0 });
 
             }
 
