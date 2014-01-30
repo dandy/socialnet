@@ -12,12 +12,14 @@ namespace Socialnet.Controllers
     public class ProfileController : Controller
     {
         SocialContext _db = new SocialContext();
+        UnitOfWork unitOfWork = new UnitOfWork();
         [Authorize]
         public ActionResult Index()
         {
+
             ProfileViewModel model = new ProfileViewModel()
             {
-                UserPhotos = _db.Photos.Where(u => u.Username == User.Identity.Name).ToList()
+              //  UserPhotos = _db.Photos.Where(u => u.Username == User.Identity.Name).ToList()
             };
             return View(model);
         }
@@ -25,12 +27,19 @@ namespace Socialnet.Controllers
         public ActionResult ShowUserProfile(string username)
         {
             ViewData["name"] = username;
-            ProfileViewModel model = new ProfileViewModel()
+           
+
+            var model = new ProfileViewModel()
             {
-                UserProfile = _db.Profiles.FirstOrDefault(u=>u.Username==username),
-                UserPhotos = _db.Photos.Where(u => u.Username == username).ToList(),
-                UserStatusMessages = _db.StatusMessages.Where(m => m.Username == username).ToList(),
+                PostComment = new Comment(),
+                UserFeeds = unitOfWork.NewsFeedEngine.GetPostByUser(username),
+                UserProfile = unitOfWork.Context.Profiles.FirstOrDefault(u => u.Username == username),
+                StatusMessage = new StatusMessage() { Username = username},
+                MyFriendRequests = unitOfWork.Context.FriendRequests.Where(m => m.WantsFriend == User.Identity.Name).ToList(),
             };
+
+            ViewData["username"] = User.Identity.Name;
+            ViewData["displayName"] = unitOfWork.Context.GetUserDisplayName(User.Identity.Name);
             return View(model);
 
         }
@@ -159,7 +168,7 @@ namespace Socialnet.Controllers
                     DatePosted = DateTime.Now
                 };
 
-                _db.Photos.Add(photoEntry);
+                //_db.Photos.Add(photoEntry);
                 _db.SaveChanges();
 
             }

@@ -1,4 +1,5 @@
-﻿@model Socialnet.Models.ProfileViewModel
+﻿@using Socialnet.Models
+@model Socialnet.Models.ProfileViewModel
 
 @{
     ViewBag.Title = ViewData["name"] +" profile";
@@ -8,19 +9,56 @@
 <img src="~/images/@Model.UserProfile.ProfilePicture" height="100" />
 <br />First name: @Model.UserProfile.FirstName <br /> Last name: @Model.UserProfile.LastName
 <br />
-<br />
-@foreach (Socialnet.Models.Photo photo in Model.UserPhotos)
-{
-    <img src="@Url.Content("~/images/"+photo.Location)" height="100" width="100" />
+<div id="news_feed_wrapper">
 
-}
+    @foreach (NewsFeed feed in Model.UserFeeds)
+    {
+        <div class="news_feed">
 
-<h3>@ViewData["name"] status messages</h3>
-@foreach (Socialnet.Models.StatusMessage Status in Model.UserStatusMessages)
-{
-    @Status.DatePosted.ToShortDateString() <span>:</span> @Status.Status
-                           <br /><br />
-}
+            <div class="user_pic">
+                <img src="~/images/@feed.UserDisplayPicture" height="50" width="50" />
+            </div>
+            <div class="feed_content">
+                <div class="user_display_name">@feed.UserDisplayName</div>
+                @if (feed.FeedShareItem is StatusMessage)
+                {
+              
+                    <div class="feed_story">@( (feed.FeedShareItem as StatusMessage).Status)</div>
+                
+                }
+                else
+                {
+                    <img src="~/images/@( (feed.FeedShareItem as Photo).Location)" height="200" />
+                }
+                <div class="posted_on">@Html.GetPrettyDate(feed.FeedShareItem.DatePosted)</div>
+                <a href="#" class="show_comments_link">@feed.FeedShareItem.Comments.Count comments</a>
+                <div class="comments" id="@(feed.FeedShareItem.GetType().Name + "_" + feed.FeedShareItem.ShareId)">
+
+                    @foreach (Comment c in feed.FeedShareItem.Comments)
+                    {
+                        <div class="comment">
+                            <div class="comment_from">@c.Username <span class="comment_postedon">@Html.GetPrettyDate(c.DatePosted)</span></div>
+                            <div class="comment_text">@c.Text</div>
+                        </div>
+                    }
+                </div>
+                @using (Html.BeginForm("PostComment", "Home", FormMethod.Post, new { @class = "commentForm" }))
+                {
+                    <input type="hidden" name="@Html.NameFor(m => m.PostComment.PostId)" value="@feed.FeedShareItem.ShareId" />
+
+                    @Html.TextAreaFor(m => m.PostComment.Text, new { placeholder = "Write a comment..." })
+                        
+                    <input type="submit" value="Post Comment" />
+                    <div class="result"></div>
+                }
+
+
+
+            </div>
+            <div class="clearLeft"></div>
+        </div>
+    }
+</div>
 
 @if (User.Identity.Name == ViewData["name"].ToString())
 {

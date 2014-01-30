@@ -17,22 +17,12 @@ namespace Socialnet.Models
     public class ProfileViewModel
     {
         public Profile UserProfile { get; set; }
-        public List<Photo>
-            UserPhotos { get; set; }
+
         public StatusMessage StatusMessage { get; set; }
-        public ICollection<StatusMessage> UserStatusMessages { get; set; }
-        public ICollection<FriendRequest> MyFriendRequests { get; set; }
         public Comment PostComment { get; set; }
 
+        public ICollection<FriendRequest> MyFriendRequests { get; set; }
         public List<NewsFeed> UserFeeds { get; set; }
-
-        public List<NewsFeed> GetUserFeeds(String User)
-        {
-
-
-            return new List<NewsFeed>();
-
-        }
 
     }
 

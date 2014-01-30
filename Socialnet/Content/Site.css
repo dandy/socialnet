@@ -63,13 +63,16 @@ div.logo {
   width: 100%;
 }
 .navigation {
-    float: right;
+  float: right;
+  text-align: right;
+  width: 510px;
 }
 .clear {
     clear: both;
 }
 #main_nav {
     margin:0px;
+    float:right
   
 }
 #main_nav li {
@@ -81,7 +84,7 @@ div.logo {
   color: #111111;
   display: inline-block;
   font-size: 14px;
-  padding: 21px;
+  padding: 21px 18px;
   text-decoration: none;
 }
  #main_nav li.selected a {

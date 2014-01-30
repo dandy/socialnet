@@ -10,9 +10,6 @@ namespace Socialnet.Models
     public class User
     {
         [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        [Required]
         [Display(Prompt="Username")]
         public String Username { get; set; }
         [Required]
@@ -21,9 +18,8 @@ namespace Socialnet.Models
         [Required]
         [Display(Prompt = "Email")]
         public String Email { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime RegistrationDate { get; set; }
 
-        //public virtual ICollection<Friend> Friends { get; set; }
     }
 
     public class Friend
@@ -36,8 +32,6 @@ namespace Socialnet.Models
         public DateTime FriendshipDate { get; set; }
 
     }
-
- 
 
     public class FriendRequest
     {

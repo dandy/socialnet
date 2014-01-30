@@ -21,9 +21,9 @@ namespace Socialnet.Hubs
             Clients.All.sendnotification(result, resultDiv);
         }
 
-        public void AddStatus(CommentDivData result, dynamic resultDiv)
+        public void AddStatusServer(CommentDivData result)
         {
-            Clients.All.addstatusclient(result, resultDiv);
+            Clients.All.addstatusclient(result);
         }
     }
 }

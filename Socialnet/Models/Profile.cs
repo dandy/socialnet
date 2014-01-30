@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -20,6 +21,13 @@ namespace Socialnet.Models
 
     }
 
+    public class NewsFeed
+    {
+        public Share FeedShareItem { get; set; }
+        public String UserDisplayName { get; set; }
+        public String UserDisplayPicture { get; set; }
+       
+    }
    
    
 
